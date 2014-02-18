@@ -50,7 +50,7 @@ var outingRoutes = {
 	},
 	
 	view : function(req, res) {
-		var outingid = req.body.outingid;
+		var outingid = req.params.id;
 		Outing.findById(outingid, function(err, doc) {
 			if (err) {
 				console.log('retrieval error');
