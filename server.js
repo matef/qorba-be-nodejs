@@ -36,7 +36,7 @@ passport.use(new DigestStrategy({ qop: 'auth' },
 		    	  console.log('query return empty user');
 		    	  return done(null, false); 
 		      }
-		      console.log('user found ..');
+		      console.log('user found ..');		      
 		      return done(null, user, user.qaccount.password);
 		    });
 		  },
@@ -61,15 +61,15 @@ app.get('/', siteRoute.index);
 app.get('/login',
 		passport.authenticate('digest', { session: false }),
 		siteRoute.logIn);
-
 //user
 app.get('/user/:id',
 		passport.authenticate('digest', { session: false }),
 		userRoute.view);
-app.put('/user', userRoute.create);
 app.post('/user/:id', 
 		passport.authenticate('digest', { session: false }),
 		userRoute.update);
+
+app.put('/user', userRoute.create);
 app.post('/user/:id/createpasswd',userRoute.createPassword);
 //app.post('/user/:id/add-fb-token', userRoute.createPassword);
 
@@ -81,7 +81,7 @@ app.post('/user/:id/friend/',
 		passport.authenticate('digest', { session: false }),
 		userRoute.addFriend);
 
-
+//outings
 app.get('/outing/:id',
 		passport.authenticate('digest', { session: false }),
 		outingRoute.view);

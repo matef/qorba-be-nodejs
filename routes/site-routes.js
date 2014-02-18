@@ -4,6 +4,12 @@ exports.index = function(req, res){
 };
 
 exports.logIn = function(req, res){
-	console.log(req.body);
-	res.end("logged in .. :) ");
+	res.set('Content-Type', 'application/json');
+	res.json({
+		status : "success",
+		data : {
+			username:req.user.username,
+			id:req.user._id
+		}
+	});	
 }
