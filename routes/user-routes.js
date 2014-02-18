@@ -11,12 +11,18 @@ var userRoutes = {
 			if (!user) {
 				console.log('no user found ... ');
 				res.set('Content-Type', 'application/json');
-				res.json('{result:"not found"}');
+				res.json({
+					status : "error",
+					data : "no user found"
+				});	
 				return;
 			}
 			console.log('current user is found' + JSON.stringify(user));
 			res.set('Content-Type', 'application/json');
-			res.json(user);
+			res.json({
+				status : "success",
+				data : user
+			});	
 		});
 	},
 	update : function(req, res) {
@@ -33,10 +39,26 @@ var userRoutes = {
 			fullname : requser.fullname,
 			profileimg : requser.profileimg
 		});
-		user.save();
+		user.save(function(err){
+			if(err){
+				console.log('error happend while creating new user ...');
+				console.log(err);
+				res.set('Content-Type', 'application/json');
+				res.json({
+					status : "error",
+					data : err
+				});			
+			}
+			else{
+				res.set('Content-Type', 'application/json');
+				res.json({
+					status : "success",
+					data : user
+				});					
+			}
+		});
 
-		res.set('Content-Type', 'application/json');
-		res.json(user);
+		
 	},	
 	createPassword : function(req,res){
 		var userid = req.params.id;
@@ -49,7 +71,10 @@ var userRoutes = {
 			user.qaccount.password = password;
 			user.save();
 			res.set('Content-Type', 'application/json');
-			res.json(user);
+			res.json({
+				status : "success",
+				data : user
+			});	
 		});
 	},	
 	addFriend : function(req, res) {
@@ -73,7 +98,10 @@ var userRoutes = {
 				console.log('new friend added successfully ...');
 
 				res.set('Content-Type', 'application/json');
-				res.json('{status:done}');
+				res.json({
+					status : "success",
+					data : user
+				});	
 			});
 
 		});
@@ -91,7 +119,10 @@ var userRoutes = {
 				}
 			}, function(err, users) {
 				res.set('Content-Type', 'application/json');
-				res.json(users);
+				res.json({
+					status : "success",
+					data : users
+				});	
 			});
 		});
 	}

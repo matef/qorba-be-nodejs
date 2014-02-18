@@ -14,9 +14,12 @@ var outingRoutes = {
 				console.log('retrieval error');
 				throw err;
 			}
-			console.log('documents are loaded successfully');
+			console.log('documents are loaded successfully');			
 			res.set('Content-Type', 'application/json');
-			res.json(docs);
+			res.json({
+				status : "success",
+				data : docs
+			});
 		});
 	},
 	
@@ -37,7 +40,11 @@ var outingRoutes = {
 			}, function(err, outings) {
 				console.log('there are ' + outings.length+ ' frinds outings found ...');
 				res.set('Content-Type', 'application/json');
-				res.json(outings);
+				res.set('Content-Type', 'application/json');
+				res.json({
+					status : "success",
+					data : outings
+				});
 			});
 		});
 	},
@@ -51,7 +58,11 @@ var outingRoutes = {
 			}
 			console.log('document is loaded successfully');
 			res.set('Content-Type', 'application/json');
-			res.json(doc);
+			res.set('Content-Type', 'application/json');
+			res.json({
+				status : "success",
+				data : doc
+			});
 		});
 	},
 	
@@ -74,6 +85,11 @@ var outingRoutes = {
 			outing.createdby = reqouting.createdby;
 
 			outing.update();
+			res.set('Content-Type', 'application/json');
+			res.json({
+				status : "success",
+				data : outing
+			});
 		});
 	},
 	
@@ -84,7 +100,7 @@ var outingRoutes = {
 			res.set('Content-Type', 'application/json');
 			res.json({
 				status : "validation-error",
-				message : "outing date is mandatory"
+				data : "outing date is mandatory"
 			});
 		} else {
 			var newouting = new Outing({

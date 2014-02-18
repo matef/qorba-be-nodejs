@@ -1,20 +1,24 @@
 var mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/test');
+var mongoUri = process.env.MONGOLAB_URI ||
+			process.env.MONGOHQ_URL ||
+			'mongodb://localhost/test';
+
+mongoose.connect(mongoUri);
 
 var fs = require('fs');
 var express = require('express');
 var app = express();
-var siteRoute = require('./routes/site');
+var siteRoute = require('./routes/site-routes');
 var userRoute = require('./routes/user-routes');
 var outingRoute = require('./routes/outing-routes');
-var https = require('https');
+//var https = require('https');
 
 var User = require("./model/user");
 
-var privateKey  = fs.readFileSync(__dirname +'/cert/qorba-key.pem', 'utf8');
-var certificate = fs.readFileSync(__dirname +'/cert/qorba-cert.pem', 'utf8');
+//var privateKey  = fs.readFileSync(__dirname +'/cert/qorba-key.pem', 'utf8');
+//var certificate = fs.readFileSync(__dirname +'/cert/qorba-cert.pem', 'utf8');
 
-var server = https.createServer({key: privateKey, cert: certificate},app);
+//var server = https.createServer({key: privateKey, cert: certificate},app);
 
 
 var passport = require('passport');
@@ -54,27 +58,47 @@ app.use(passport.session());
 
 //General
 app.get('/', siteRoute.index);
+app.get('/login',
+		passport.authenticate('digest', { session: false }),
+		siteRoute.logIn);
 
 //user
 app.get('/user/:id',
 		passport.authenticate('digest', { session: false }),
 		userRoute.view);
 app.put('/user', userRoute.create);
-app.post('/user/:id', userRoute.update);
-app.post('/user/:id/createpasswd', userRoute.createPassword);
+app.post('/user/:id', 
+		passport.authenticate('digest', { session: false }),
+		userRoute.update);
+app.post('/user/:id/createpasswd',userRoute.createPassword);
 //app.post('/user/:id/add-fb-token', userRoute.createPassword);
 
 
-app.get('/user/:id/friends', userRoute.listFriends);
-app.post('/user/:id/friend/',userRoute.addFriend);
+app.get('/user/:id/friends',
+		passport.authenticate('digest', { session: false }),
+		userRoute.listFriends);
+app.post('/user/:id/friend/',
+		passport.authenticate('digest', { session: false }),
+		userRoute.addFriend);
 
 
-app.get('/outing/:id', outingRoute.view);
-app.put('/outing', outingRoute.create);
-app.post('/outing/:id', outingRoute.update);
+app.get('/outing/:id',
+		passport.authenticate('digest', { session: false }),
+		outingRoute.view);
+app.put('/outing', 
+		passport.authenticate('digest', { session: false }),
+		outingRoute.create);
+app.post('/outing/:id', 
+		passport.authenticate('digest', { session: false }),
+		outingRoute.update);
 
-app.get('/user/:id/outings',outingRoute.listUserOutings);
+app.get('/user/:id/outings',
+		passport.authenticate('digest', { session: false }),
+		outingRoute.listUserOutings);
 
 //listen
-server.listen(3000);
-console.log('Express app started on port 3000');
+//server.listen(3000);
+var port = Number(process.env.PORT || 3000);
+app.listen(port, function() {
+  console.log("Listening on " + port);
+});
