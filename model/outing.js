@@ -1,5 +1,6 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
+var states = 'created closed'.split(' ')
 var Outing = new Schema({
 	outingdate : Date,
 	location: {
@@ -13,7 +14,18 @@ var Outing = new Schema({
 	details : String,
 	creationdate : { type: Date, default: Date.now},
 	createdby : Schema.Types.ObjectId,
-	joiners : [Schema.Types.ObjectId],
-	attendees : [Schema.Types.ObjectId]
+	joiners : [{
+		type: Schema.Types.ObjectId, 
+		ref:'User'
+	}],
+	attendees : [{
+		type:Schema.Types.ObjectId,
+		ref:'User'
+	}],
+	state:{ 
+		type: String, 
+		enum: states,
+		default:states[0]
+	}
 });
 module.exports = mongoose.model('Outing', Outing);

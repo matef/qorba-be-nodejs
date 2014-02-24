@@ -122,7 +122,66 @@ var outingRoutes = {
 				data : newouting
 			});
 		}
+	},
+	
+	join : function(req,res){
+		var outingid = req.params.id;
+		var joinerid = req.body.joinerid;
+		
+		Outing.findById(outingid, function(err, outing) {
+			if (err) {
+				console.log('retrieval error');
+				throw err;
+			}
+			if(outing.joiners.indexOf(joinerid)){
+				outing.joiners.push(joinerid);
+				outing.save();
+				res.set('Content-Type', 'application/json');
+				res.json({
+					status : "success",
+					data : outing
+				});
+			}
+			else{
+				res.set('Content-Type', 'application/json');
+				res.json({
+					status : "error",
+					message : "joiner already exists",
+					data : outing
+				});
+			}
+		});
+	},
+	
+	attend : function(req,res){
+		var outingid = req.params.id;
+		var attendeeid = req.body.attendeeid;
+		
+		Outing.findById(outingid, function(err, outing) {
+			if (err) {
+				console.log('retrieval error');
+				throw err;
+			}
+			if(outing.attendees.indexOf(attendeeid)){
+				outing.attendees.push(attendeeid);
+				outing.save();
+				res.set('Content-Type', 'application/json');
+				res.json({
+					status : "success",
+					data : outing
+				});
+			}
+			else{
+				res.set('Content-Type', 'application/json');
+				res.json({
+					status : "error",
+					message : "attendee already exists",
+					data : outing
+				});
+			}
+		});
 	}
+	
 };
 
 module.exports = outingRoutes;

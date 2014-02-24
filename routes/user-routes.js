@@ -85,24 +85,30 @@ var userRoutes = {
 				console.log('retrieval error');
 				throw err;
 			}
-			if (user.friends instanceof Array) {
-				user.friends.push(friendid);
-			} else {
-				user.friends = [ friendid ];
+			if(user.friends.indexOf(friendid)){
+				user.friends.push(friendid);				
+				user.save(function(err) {
+					if (err) {
+						console.log('retrieval error');
+						throw err;
+					}
+					console.log('new friend added successfully ...');
+	
+					res.set('Content-Type', 'application/json');
+					res.json({
+						status : "success",
+						data : user
+					});	
+				});
 			}
-			user.save(function(err) {
-				if (err) {
-					console.log('retrieval error');
-					throw err;
-				}
-				console.log('new friend added successfully ...');
-
+			else{
 				res.set('Content-Type', 'application/json');
 				res.json({
-					status : "success",
+					status : "error",
+					message : "friend already exists",
 					data : user
-				});	
-			});
+				});
+			}
 
 		});
 	},

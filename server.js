@@ -91,6 +91,12 @@ app.put('/outing',
 app.post('/outing/:id', 
 		passport.authenticate('digest', { session: false }),
 		outingRoute.update);
+app.post('/outing/:id/join',
+		passport.authenticate('digest', { session: false }),
+		outingRoute.join);
+app.post('/outing/:id/attend',
+		passport.authenticate('digest', { session: false }),
+		outingRoute.attend);
 
 app.get('/user/:id/outings',
 		passport.authenticate('digest', { session: false }),
