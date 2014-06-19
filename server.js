@@ -14,7 +14,10 @@ var outingRoute = require('./routes/outing-routes');
 //var https = require('https');
 
 var User = require("./model/user");
-
+var logger = require('morgan');
+var cookieParser = require('cookie-parser');
+var bodyParser = require('body-parser');
+var methodOverride = require('method-override');
 //var privateKey  = fs.readFileSync(__dirname +'/cert/qorba-key.pem', 'utf8');
 //var certificate = fs.readFileSync(__dirname +'/cert/qorba-cert.pem', 'utf8');
 
@@ -48,10 +51,10 @@ passport.use(new DigestStrategy({ qop: 'auth' },
 
 
 //config
-app.use(express.logger('dev'));
-app.use(express.cookieParser());
-app.use(express.bodyParser());
-app.use(express.methodOverride());
+app.use(logger());
+app.use(cookieParser());
+app.use(bodyParser());
+app.use(methodOverride());
 app.use(express.static(__dirname + '/public'));
 app.use(passport.initialize());
 app.use(passport.session());

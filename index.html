@@ -1,0 +1,60 @@
+<html>
+    <head>
+        <script  src="bower_components/jquery/dist/jquery.min.js"></script>
+        <script src="bower_components/isotope/jquery.isotope.min.js"></script>
+    
+    <script>
+        $(document).ready(function() {
+            var $container = $('#container');
+            // init
+            $container.isotope({
+              // options
+              itemSelector: '.item',
+              layoutMode: ''
+            });
+        });
+       
+    </script>
+      <style>.item { width: 25%; }
+        .item2 { width: 35%; }</style>
+    <style>
+        
+.rainbowed > *:nth-child(10n+0) { background: hsl(   0, 100%, 50%); }
+.rainbowed > *:nth-child(10n+1) { background: hsl(  36, 100%, 50%); }
+.rainbowed > *:nth-child(10n+2) { background: hsl(  72, 100%, 50%); }
+.rainbowed > *:nth-child(10n+3) { background: hsl( 108, 100%, 50%); }
+.rainbowed > *:nth-child(10n+4) { background: hsl( 144, 100%, 50%); }
+.rainbowed > *:nth-child(10n+5) { background: hsl( 180, 100%, 50%); }
+.rainbowed > *:nth-child(10n+6) { background: hsl( 216, 100%, 50%); }
+.rainbowed > *:nth-child(10n+7) { background: hsl( 252, 100%, 50%); }
+.rainbowed > *:nth-child(10n+8) { background: hsl( 288, 100%, 50%); }
+.rainbowed > *:nth-child(10n+9) { background: hsl( 324, 100%, 50%); }
+
+        </style>
+    </head>
+    <body>
+        <h1>hello</h1>
+        <div id="container">
+            <div class="item" style="background:red">item 1</div>
+            <div class="item" style="background:bule">item 2</div>
+            <div class="item2" style="background:green">item 3</div>
+            <div class="item2" style="background:red">item 4</div>
+        </div>
+        
+    <div class="isotope is-varying-sizes rainbowed" style="position: relative; height: 224px; width: auto;">
+        <div class="element-item width2" style="position: absolute; left: 0px; top: 0px;"><p class="symbol">1</p></div>
+        <div class="element-item height2" style="position: absolute; left: 220px; top: 0px;"><p class="symbol">2</p></div>
+        <div class="element-item" style="position: absolute; left: 330px; top: 0px;"><p class="symbol">3</p></div>
+        <div class="element-item" style="position: absolute; left: 440px; top: 0px;"><p class="symbol">4</p></div>
+        <div class="element-item width2 height2" style="position: absolute; left: 550px; top: 0px;"><p class="symbol">5</p></div>
+        <div class="element-item width2" style="position: absolute; left: 770px; top: 0px;"><p class="symbol">6</p></div>
+        <div class="element-item height2" style="position: absolute; left: 990px; top: 0px;"><p class="symbol">7</p></div>
+        <div class="element-item" style="position: absolute; left: 0px; top: 110px;"><p class="symbol">8</p></div>
+        <div class="element-item" style="position: absolute; left: 110px; top: 110px;"><p class="symbol">9</p></div>
+        <div class="element-item width2" style="position: absolute; left: 330px; top: 110px;"><p class="symbol">10</p></div>
+        <div class="element-item" style="position: absolute; left: 770px; top: 110px;"><p class="symbol">11</p></div>
+        <div class="element-item" style="position: absolute; left: 880px; top: 110px;"><p class="symbol">12</p></div>
+    </div>
+        
+    </body>
+</html>

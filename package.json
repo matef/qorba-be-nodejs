@@ -12,7 +12,17 @@
 		"mongoose" : "*",
 		"validator" : "*",
 		"passport" : "*",
-		"passport-http":"*"
+		"passport-http":"*",
+		"connect": "*",
+		"cookies": "*",
+		"raw-body" : "*",
+		"connect-multiparty": "*",
+		"qs" : "*",
+		"st": "*",
+		"morgan" : "*",
+		"cookie-parser" : "*",
+		"body-parser" : "*",
+		"method-override" : "*"
 	},
   "repository": "",
   "keywords": [

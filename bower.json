@@ -1,0 +1,26 @@
+{
+  "name": "qorba-ui",
+  "version": "0.0.1",
+  "homepage": "https://github.com/matef/qorba-be-nodejs",
+  "authors": [
+    "Mahmoud Atef <j7ooda@gmail.com>"
+  ],
+  "description": "web version of qorba app",
+  "main": "server.js",
+  "keywords": [
+    "qorba",
+    "web"
+  ],
+  "license": "GPL 3.0",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "~3.1.1"
+  }
+}

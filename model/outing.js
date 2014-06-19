@@ -8,9 +8,10 @@ var Outing = new Schema({
 			longtude : Number,
 			viewpoint : Number
 		},
-		img : String
+		img : String,
+		description : String
 	},
-	description : String,
+	comment : String,
 	details : String,
 	creationdate : { type: Date, default: Date.now},
 	createdby : Schema.Types.ObjectId,
