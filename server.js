@@ -62,48 +62,23 @@ app.use(passport.session());
 //General
 app.get('/', siteRoute.index);
 app.get('/login',
-		passport.authenticate('digest', { session: false }),
 		siteRoute.logIn);
-//user
-app.get('/user/:id',
-		passport.authenticate('digest', { session: false }),
-		userRoute.view);
-app.post('/user/:id', 
-		passport.authenticate('digest', { session: false }),
-		userRoute.update);
-
+//user & friends
+app.get('/user/:uname',	userRoute.view);
+app.post('/user/:uname', userRoute.update);
 app.put('/user', userRoute.create);
-app.post('/user/:id/createpasswd',userRoute.createPassword);
-//app.post('/user/:id/add-fb-token', userRoute.createPassword);
-
-
-app.get('/user/:id/friends',
-		passport.authenticate('digest', { session: false }),
-		userRoute.listFriends);
-app.post('/user/:id/friend/',
-		passport.authenticate('digest', { session: false }),
-		userRoute.addFriend);
+app.post('/user/:uname/createpasswd',userRoute.createPassword);
+//app.post('/user/:uname/add-fb-token', userRoute.createPassword);
+app.get('/user/:uname/friends',	userRoute.listFriends);
+app.post('/user/:uname/friend/', userRoute.addFriend);
+app.get('/user/:uname/outings',	outingRoute.listUserOutings);
 
 //outings
-app.get('/outing/:id',
-		passport.authenticate('digest', { session: false }),
-		outingRoute.view);
-app.put('/outing', 
-		passport.authenticate('digest', { session: false }),
-		outingRoute.create);
-app.post('/outing/:id', 
-		passport.authenticate('digest', { session: false }),
-		outingRoute.update);
-app.post('/outing/:id/join',
-		passport.authenticate('digest', { session: false }),
-		outingRoute.join);
-app.post('/outing/:id/attend',
-		passport.authenticate('digest', { session: false }),
-		outingRoute.attend);
-
-app.get('/user/:id/outings',
-		passport.authenticate('digest', { session: false }),
-		outingRoute.listUserOutings);
+app.get('/outing/:id', outingRoute.view);
+app.put('/outing', outingRoute.create);
+app.post('/outing/:id', outingRoute.update);
+app.post('/outing/:id/join', outingRoute.join);
+app.post('/outing/:id/attend', outingRoute.attend);
 
 //listen
 //server.listen(3000);

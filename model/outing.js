@@ -14,7 +14,7 @@ var Outing = new Schema({
 	comment : String,
 	details : String,
 	creationdate : { type: Date, default: Date.now},
-	createdby : Schema.Types.ObjectId,
+	createdby : String,
 	joiners : [{
 		type: Schema.Types.ObjectId, 
 		ref:'User'

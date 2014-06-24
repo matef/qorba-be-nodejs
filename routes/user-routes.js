@@ -2,8 +2,8 @@ var User = require("../model/user");
 
 var userRoutes = {
 	view : function(req, res) {
-		var userid = req.params.id;
-		User.findById(userid, function(err, user) {
+		var uname = req.params.uname;
+		User.findOne({username : uname}, function(err, user) {
 			if (err) {
 				console.log('retrieval error');
 				throw err;
@@ -61,9 +61,9 @@ var userRoutes = {
 		
 	},	
 	createPassword : function(req,res){
-		var userid = req.params.id;
+		var uname = req.params.uname;
 		var password = req.body.password;
-		User.findById(userid, function(err, user) {
+		User.findOne({username : uname}, function(err, user) {
 			if (err) {
 				console.log('retrieval error');
 				throw err;
@@ -78,9 +78,9 @@ var userRoutes = {
 		});
 	},	
 	addFriend : function(req, res) {
-		var userid = req.params.id;
+		var uname = req.params.uname;
 		var friendid = req.body.friendid;
-		User.findById(userid, function(err, user) {
+		User.findOne({username : uname}, function(err, user) {
 			if (err) {
 				console.log('retrieval error');
 				throw err;
@@ -113,8 +113,8 @@ var userRoutes = {
 		});
 	},
 	listFriends : function(req, res) {
-		var userid = req.params.id;
-		User.findById(userid, function(err, user) {
+		var uname = req.params.uname;
+		User.findOne({username : uname}, function(err, user) {
 			if (err) {
 				console.log('retrieval error');
 				throw err;

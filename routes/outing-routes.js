@@ -5,10 +5,10 @@ var validator = require('validator');
 var outingRoutes = {
 
 	listUserOutings : function(req, res) {
-		var userid = req.params.id;
-		console.log('retrieving all outing for user = ' + userid);
+		var uname = req.params.uname;
+		console.log('retrieving all outing for user = ' + uname);
 		Outing.find({
-			createdby : userid
+			createdby : uname
 		}, function(err, docs) {
 			if (err) {
 				console.log('retrieval error');
@@ -107,12 +107,14 @@ var outingRoutes = {
 				outingdate : reqouting.outingdate,
 				location : {
 					geometry : {
-						longtude : reqouting.location.longtude,
-						viewpoint : reqouting.location.viewpoint
-					}
+						longtude : reqouting.location.geometry.longtude,
+						viewpoint : reqouting.location.geometry.viewpoint
+					},
+					img : reqouting.location.img,
+					description : reqouting.location.description
 				},
-				description : reqouting.description,
-				detainls : reqouting.details,
+				comment : reqouting.comment,
+				details : reqouting.details,
 				createdby : reqouting.createdby
 			});
 			newouting.save();
